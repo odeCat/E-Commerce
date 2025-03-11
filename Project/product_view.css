@@ -137,6 +137,16 @@ main {
     gap: 70px;
 }
 
+.all-products {
+    margin-bottom: 20px;
+}
+  
+.all-products h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #0D3B66;
+}
+
 /* categories section */
 .categories-section {
     width: 120px;
@@ -271,4 +281,148 @@ h2 {
     justify-content: center;
     border-radius: 5px;
     font-weight: 600;
+}
+
+/* 
+Last Updated: [2025-03-11]
+Author: Catherine Olleres
+Last Updated By: Catherine Olleres
+*/
+
+/* Product View */
+.product-view {
+    display: flex;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.product-view figure {
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.product-view figure img {
+    width: 280px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.product-details h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #0D3B66;
+}
+
+.rating-text {
+    color: #999;
+}
+
+.price {
+    font-size: 1.4rem;
+    color: #0D3B66;
+    font-weight: bold;
+}
+
+.quantity-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+  
+.quantity-section input[type="number"] {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.total-amount {
+    background: #f1f2f6;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #0D3B66;
+}
+  
+.add-to-cart {
+    background: #fff;
+    border: 2px solid #0D3B66;
+    color: #0D3B66;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.2s;
+}
+  
+.add-to-cart:hover {
+    background: #F4d35E;
+    color: #fff;
+}
+
+/* Similar Items */
+.similar-items {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.similar-items h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0D3B66;
+}
+
+.similar-items-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.similar-items-container .item {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 150px;
+    flex-shrink: 0;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 10px;
+}
+
+.similar-items-container .item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.similar-items-container .item img {
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.similar-items-container .item p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #0D3B66;
+    line-height: 1.2;
+    font-weight: 500;
 }
