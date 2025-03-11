@@ -10,8 +10,8 @@
             <nav>
                 <a><img src="/Project/Assets/sub_logo.png" alt="" class="nav-logo">Let’s order PC parts for you.</a>
                 <div>
-                    <button class="btn btn-outline" type="button">Signup</button>
-                    <button class="btn btn-background" type="button">Login</button>
+                    <button id="signupButton" class="btn btn-outline" type="button">Signup</button>
+                    <button id="loginButton" class="btn btn-background" type="button">Login</button>
                 </div>
             </nav>
         </header>
@@ -31,37 +31,37 @@
                 <section class="categories-section">
                     <h2>Categories</h2>
                     <ul class="categories-btn">
-                        <li>
+                        <li data-category="all">
                             <a href="#">
                                 <img class="list-icons" src="/Project/Assets/menu_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.png" alt="All products Icon.">
                                 <h3>All Products</h3>
                             </a>
                         </li>
-                        <li>
+                        <li data-category="monitor">
                             <a href="#">
                                 <img class="list-icons" src="/Project/Assets/desktop_windows_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="Monitor Icon.">
                                 <h3>Monitor</h3>
                             </a>
                         </li>
-                        <li>
+                        <li data-category="cpu">
                             <a href="#">
-                                <img class="list-icons" src="/Project/Assets/developer_board_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg " alt="CPU Icon.">
+                                <img class="list-icons" src="/Project/Assets/developer_board_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="CPU Icon.">
                                 <h3>CPU</h3>
                             </a>
                         </li>
-                        <li>
+                        <li data-category="gpu">
                             <a href="#">
-                                <img class="list-icons" src="/Project/Assets/aod_tablet_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg " alt="GPU Icon.">
+                                <img class="list-icons" src="/Project/Assets/aod_tablet_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="GPU Icon.">
                                 <h3>GPU</h3>
                             </a>
                         </li>
-                        <li>
+                        <li data-category="ram">
                             <a href="#">
-                                <img class="list-icons" src="/Project/Assets/memory_alt_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg " alt="RAM Icon.">
+                                <img class="list-icons" src="/Project/Assets/memory_alt_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="RAM Icon.">
                                 <h3>RAM</h3>
                             </a>
                         </li>
-                        <li>
+                        <li data-category="pc-case">
                             <a href="#">
                                 <img class="list-icons" src="/Project/Assets/side_navigation_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="Case Icon.">
                                 <h3>PC Case</h3>
@@ -69,217 +69,60 @@
                         </li>
                     </ul>
                 </section>
-                <sectio class="all-products">
+                <section class="all-products">
                     <h2>All Products</h2>
-                    <ul class="product-card">
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/MSI MPG 321 URXW.webp" alt="MSI MPG 321URXW.">
-                                <div class="product-card-body">
-                                    <h5>MSI MPG 321URXW</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱61,495.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Intel Core Ultra 9 285.webp" alt="Intel Core Ultra 9 285.">
-                                <div class="product-card-body">
-                                    <h5>Intel Core Ultra 9 285</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱35,950.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Asus ROG Strix GeForce RTX 4090.webp" alt="Asus ROG Strix GeForce RTX 4090.">
-                                <div class="product-card-body">
-                                    <h5>Asus ROG Strix GeForce RTX 4090</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱145,695.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/G.Skill Trident Z Neo RGB 32GB.webp" alt="G.Skill Trident Z Neo RGB 32GB.">
-                                <div class="product-card-body">
-                                    <h5>G.Skill Trident Z Neo RGB 32GB</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱4,350.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Asus ProArt PA401.webp" alt="Asus ProArt PA401.">
-                                <div class="product-card-body">
-                                    <h5>Asus ProArt PA401</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱6,050.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/MSI Pro MP225V.webp" alt="MSI Pro MP225V.">
-                                <div class="product-card-body">
-                                    <h5>MSI Pro MP225V</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱3,595.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Intel Core Ultra 7 265.webp" alt="Intel Core Ultra 7 265.">
-                                <div class="product-card-body">
-                                    <h5>Intel Core Ultra 7 265</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱22,395.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Gigabyte Geforce RTX 4090.webp" alt="Gigabyte Geforce RTX 4090.">
-                                <div class="product-card-body">
-                                    <h5>Gigabyte Geforce RTX 4090</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱117,750.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Corsair Vengeance RGB Pro SL 32GB.webp" alt="Corsair Vengeance RGB Pro SL 32GB.">
-                                <div class="product-card-body">
-                                    <h5>Corsair Vengeance RGB Pro SL 32GB</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱5,695.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Corsair 5000D.webp" alt="Corsair 5000D.">
-                                <div class="product-card-body">
-                                    <h5>Corsair 5000D</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱8,650.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Gigabyte M27QA.webp" alt="Gigabyte M27QA.">
-                                <div class="product-card-body">
-                                    <h5>Gigabyte M27QA</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱15,950.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Intel Core i7-14700.webp" alt="Intel Core i7-14700.">
-                                <div class="product-card-body">
-                                    <h5>Intel Core i7-14700</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱20,995.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/ASRock AMD Radeon RX 6500.webp" alt="ASRock AMD Radeon RX 6500.">
-                                <div class="product-card-body">
-                                    <h5>ASRock AMD Radeon RX 6500</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱9,450.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/G.Skill Ripjaws V 32GB.webp" alt="G.Skill Ripjaws V 32GB.">
-                                <div class="product-card-body">
-                                    <h5>G.Skill Ripjaws V 32GB</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱3,295.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img class="product-img" src="/Project/Assets/Montech Air X ARGB.webp" alt="Montech Air X.">
-                                <div class="product-card-body">
-                                    <h5>Montech Air X</h5>
-                                    <div class="product-card-text">
-                                        <img class="ratings-icon" src="/Project/Assets/5 star rating icon.webp" alt="Stars icon">
-                                        <h6>₱3,350.00</h6>
-                                    </div>
-                                    <h5>5 reviews</h5>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+                    <ul class="product-card" id="productList"></ul>
                 </section>
             </div>
-            <ul class="pagination">
-                <li><</li>
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li>5</li>
-                <li>></li>
-            </ul>
         </main>
+        <div id="authModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="modal-header">
+                    <img src="/Project/Assets/main_logo.png" alt="Logo" class="modal-logo">
+                    <h2>Login to order.</h2>
+                    <a href="#" id="switchToSignup">New Member? <span>Register here.</span></a>
+                </div>
+                <form id="authForm">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+        
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+        
+                    <button class="btn-modal" type="submit" id="authButton">Login</button>
+                </form>
+            </div>
+        </div>
+        <div id="signupModal" class="modal">
+            <div class="modal-content">
+                <span class="close close-signup">&times;</span>
+                <div class="modal-header">
+                    <img src="/Project/Assets/main_logo.png" alt="Logo" class="modal-logo">
+                    <h2>Sign up to start shopping.</h2>
+                    <a href="#" id="switchToLogin">Already have an account? <span>Login here.</span></a>
+                </div>
+                <form id="signupForm">
+                    <div class="first-and-last-name">
+                        <label for="signup-first-name">First Name</label>
+                        <input type="text" id="signup-first-name" placeholder="Enter your first name" required>
+
+                        <label for="signup-last-name">Last Name Name</label>
+                        <input type="text" id="signup-last-name" placeholder="Enter your last name" required>
+                    </div>
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+        
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Enter your password" required>
+        
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required>
+        
+                    <button class="btn-modal" type="submit" id="signupButton">Sign Up</button>
+                </form>
+            </div>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
