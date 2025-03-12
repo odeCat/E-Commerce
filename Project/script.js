@@ -147,24 +147,25 @@ let filteredProducts = products;
 
 
 function displayProducts(productsToShow, category = "All Products") {
-    productList.innerHTML = "";
+    productList.innerHTML = ""; // Clear the current product list
     allProductsHeading.textContent = category;
 
     productsToShow.forEach(product => {
         const productItem = document.createElement("li");
         productItem.innerHTML = `
-            <a href="#">
+            <a href="#" class="product-link" data-id="${product.id}">
                 <img class="product-img" src="${product.image}" alt="${product.name}">
                 <div class="product-card-body">
-                    <h5>${product.name}</h5>
+                    <h5 class="product-name">${product.name}</h5>
                     <div class="product-card-text">
                         <img class="ratings-icon" src="${product.rating}" alt="Stars icon">
-                        <h6>${product.price}</h6>
+                        <h6 class="product-price">${product.price}</h6>
                     </div>
-                    <h5>${product.reviews}</h5>
+                    <h5 class="product-reviews">${product.reviews}</h5>
                 </div>
             </a>
         `;
+
         productList.appendChild(productItem);
     });
 }
@@ -173,6 +174,7 @@ function displayProducts(productsToShow, category = "All Products") {
 categoryButtons.forEach(button => {
     button.addEventListener("click", function () {
         const category = this.getAttribute("data-category");
+
         if (category === "all") {
             filteredProducts = products;
             displayProducts(filteredProducts, "All Products");
@@ -181,6 +183,12 @@ categoryButtons.forEach(button => {
             filteredProducts = products.filter(product => product.category === category);
             displayProducts(filteredProducts, categoryName);
         }
+
+        productList.style.display = "flex";
+        allProductsSection.style.display = "block";
+        categoriesSection.style.display = "block";
+        productViewContainer.style.display = "none";
+
     });
 });
 
@@ -419,23 +427,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to update product details
     function loadProductView(product) {
+        console.log("Loading product:", product.name); // Debugging log
+    
+        // Update product details
         document.getElementById("product-image").src = product.image;
         document.getElementById("product-title").textContent = product.name;
         document.getElementById("product-rating").textContent = product.reviews;
         document.getElementById("product-price").textContent = product.price;
         document.getElementById("product-description").textContent = product.description || "No description available.";
-
+    
         // Reset quantity and update total price
         quantityInput.value = 1;
         totalAmount.textContent = product.price;
-
+    
         // Hide product list, categories, and show product details
         productList.style.display = "none";
-        allProductsSection.style.display = "none"; // Hide "All Products" section
-        categoriesSection.style.display = "none"; // Hide Categories
-        productViewContainer.style.display = "block"; // Show product details
-
-        // Load similar items with the same styling as products
+        allProductsSection.style.display = "none"; 
+        categoriesSection.style.display = "none"; 
+        productViewContainer.style.display = "block"; 
+        
         loadSimilarItems(product.category, product.id);
     }
 
@@ -523,4 +533,18 @@ document.getElementById("allProductsBtn").addEventListener("click", (event) => {
     document.querySelector(".all-products").style.display = "block"; 
     document.querySelector(".categories-section").style.display = "block"; 
     document.getElementById("productViewContainer").style.display = "none"; 
+});
+
+document.getElementById("quantity").addEventListener("input", function () {
+    let qty = parseInt(this.value, 10) || 1; // Ensure a valid number
+    if (qty < 1) qty = 1; // Prevent negative or zero values
+    this.value = qty; // Keep the value valid
+
+    // Get the product's base price
+    const productPrice = parseFloat(
+        document.getElementById("product-price").textContent.replace(/[₱,]/g, "")
+    );
+
+    // Update total price
+    document.getElementById("total-amount").textContent = "₱" + (productPrice * qty).toLocaleString("en-US", { minimumFractionDigits: 2 });
 });
