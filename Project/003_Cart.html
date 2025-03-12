@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shopping Cart</title>
+        <link rel="stylesheet" href="cart.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a><img src="Assets/sub_logo.png" alt="Sub Logo" class="nav-logo">Let's order PC parts for you.</a>
+                <div class="nav-profile">
+                    <div class="profile-dropdown">
+                        <img src="Assets/3135715.png" alt="Profile" class="profile-img">
+                        <div class="dropdown-content">
+                            <button class="btn btn-background">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <aside>
+            <a href="#"><img src="Assets/main_logo.png" class="aside-logo" alt="Main Logo"></a>
+            <a href="001_Dashboard.html"><img src="Assets/dash.png" class="aside-logo dash-btn" alt="Dashboard"></a>
+        </aside>
+
+        <main class="main-content">
+            <section class="search-section">
+                <input class="search-bar" type="search" placeholder="Search Products">
+                <img class="search-icon" src="Assets/search_24dp_0E3B66_FILL0_wght400_GRAD0_opsz24.svg" alt="Search Icon">
+                <div class="a2c-container">
+                    <button class="btn btn-background a2c-btn">
+                        <img class="cart-icon" src="Assets/shopping_cart_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="Cart Icon"> Cart (0)
+                    </button>
+                </div>
+            </section>
+
+            <div class="content-grid">
+                <section class="cart-items-section">
+                    <div id="cartItems" class="cart-list"></div>
+                    <div id="emptyCart" class="empty-cart hidden">
+                        <p>There are no items in this cart.</p>
+                        <button class="continue-shopping">Continue Shopping</button>
+                    </div>
+                </section>
+
+                <section class="shipping-section">
+                    <h2>Shipping Information</h2>
+                    <form id="shippingForm" class="shipping-form">
+                        <div class="form-row">
+                            <input type="text" placeholder="First Name" value="Jomar">
+                            <input type="text" placeholder="Last Name">
+                        </div>
+                        <input type="text" placeholder="Address">
+                        <input type="text" placeholder="Address 2">
+                        <div class="form-row three-cols">
+                            <input type="text" placeholder="City">
+                            <input type="text" placeholder="State">
+                            <input type="text" placeholder="ZIP Code">
+                        </div>
+
+                        <div class="order-summary">
+                            <h3>Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Items:</span>
+                                <span id="itemsTotal">₱0.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping Fee:</span>
+                                <span id="shippingFee">₱500.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total Amount:</span>
+                                <span id="totalAmount">₱500.00</span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <dialog id="deleteModal" class="modal delete-modal">
+            <h2>Are you sure you want to remove this item?</h2>
+            <div class="modal-actions">
+                <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                <button id="confirmDelete" class="btn-primary">Remove</button>
+            </div>
+        </dialog>
+
+        <dialog id="paymentModal" class="modal payment-modal">
+            <div class="modal-header">
+                <img src="Assets/main_logo.png" alt="Logo" class="modal-logo">
+                <button class="close-modal" aria-label="Close">&times;</button>
+            </div>
+            <form id="paymentForm" class="payment-form">
+                <div class="payment-methods">
+                    <img src="Assets/visa.png" alt="Visa" class="payment-card">
+                    <img src="Assets/card_16174534.png" alt="Mastercard" class="payment-card">
+                </div>
+                <h2>Card Details</h2>
+                <div class="form-group">
+                    <label for="cardName">Card Name</label>
+                    <input type="text" id="cardName">
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvc">CVC</label>
+                        <input type="text" id="cvc" placeholder="123">
+                    </div>
+                </div>
+                <div class="payment-total">
+                    <span>Total Amount:</span>
+                    <span id="paymentAmount">₱500.00</span>
+                </div>
+                <button type="submit" class="pay-btn">Pay</button>
+            </form>
+        </dialog>
+
+        <script src="carts.js"></script>
+    </body>
+</html>
