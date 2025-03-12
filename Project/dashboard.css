@@ -421,3 +421,54 @@ label {
     font-size: 20px;
     cursor: pointer;
 }
+
+ /* Dashboard after login  */
+ .hidden {
+    display: none !important;
+}
+
+#userDropdown {
+    display: none; /* Ensures it starts hidden */
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+#authButtons {
+    display: flex;
+    justify-content: flex-end; /* Adjust alignment */
+    gap: 10px;
+}
+
+#userDropdown span {
+    font-weight: bold;
+}
+
+#userDropdownMenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#userDropdown:hover #userDropdownMenu {
+    display: block;
+}
+
+#logoutButton {
+    background: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-top: 5px;
+}
+
+#logoutButton:hover {
+    padding-top: 5px;
+    background-color: rgb(194, 29, 29);
+}

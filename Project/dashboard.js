@@ -219,27 +219,63 @@ categoryButtonsClicked .forEach(button => {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    const loginButton = document.getElementById("loginButton");
-    const signupButton = document.getElementById("signupButton");
+    const authButtons = document.getElementById("authButtons");
+    const userDropdown = document.getElementById("userDropdown");
+    const usernameDisplay = document.getElementById("usernameDisplay");
 
     const loginModal = document.getElementById("authModal");
     const signupModal = document.getElementById("signupModal");
 
-    const closeLoginButton = document.querySelector(".close");
-    const closeSignupButton = document.querySelector(".close-signup");
+    const loginButton = document.getElementById("loginButton");
+    const signupButton = document.getElementById("signupButton");
+    const authForm = document.getElementById("authForm");
+    const signupForm = document.getElementById("signupForm");
+
+    const logoutButton = document.getElementById("logoutButton");
 
     const switchToSignup = document.getElementById("switchToSignup");
     const switchToLogin = document.getElementById("switchToLogin");
 
-    // Open and close login modal
-    loginButton.addEventListener("click", () => loginModal.classList.add("show"));
-    closeLoginButton.addEventListener("click", () => loginModal.classList.remove("show"));
 
-    // Open and close signup modal
-    signupButton.addEventListener("click", () => signupModal.classList.add("show"));
-    closeSignupButton.addEventListener("click", () => signupModal.classList.remove("show"));
+    function updateUI() {
+        const currentUserEmail = localStorage.getItem("currentUser");
+        console.log("Updating UI. Current User:", currentUserEmail);
+    
+        if (currentUserEmail) {
+            const userData = JSON.parse(localStorage.getItem(currentUserEmail));
+            console.log("User Data:", userData);
+    
+            if (userData && userData.firstName) {
+                console.log("Displaying username:", userData.firstName);
+                usernameDisplay.textContent = userData.firstName;
+            } else {
+                console.log("Displaying email instead");
+                usernameDisplay.textContent = currentUserEmail;
+            }
+    
+            authButtons.classList.add("hidden");
+            userDropdown.classList.remove("hidden");
+            userDropdown.style.display = "flex"; // Ensure visibility
+        } else {
+            console.log("No user found, showing login buttons.");
+            authButtons.classList.remove("hidden");
+            userDropdown.classList.add("hidden");
+            userDropdown.style.display = "none"; // Ensure it's hidden
+        }
+    }
 
-    // Click outside modal to close
+
+    // Open login modal
+    loginButton.addEventListener("click", () => {
+        loginModal.classList.add("show");
+    });
+
+    // Open signup modal
+    signupButton.addEventListener("click", () => {
+        signupModal.classList.add("show");
+    });
+
+    // Close modals when clicking outside
     window.addEventListener("click", (event) => {
         if (event.target === loginModal) loginModal.classList.remove("show");
         if (event.target === signupModal) signupModal.classList.remove("show");
@@ -257,4 +293,79 @@ document.addEventListener("DOMContentLoaded", function () {
         signupModal.classList.remove("show");
         loginModal.classList.add("show");
     });
+
+    // Handle signup
+    signupForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById("signup-first-name").value;
+        const lastName = document.getElementById("signup-last-name").value;
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return;
+        }
+
+        if (localStorage.getItem(email)) {
+            alert("User already exists!");
+            return;
+        }
+
+        // Save user data (including first name)
+        localStorage.setItem(email, JSON.stringify({ firstName, lastName, password }));
+        localStorage.setItem("currentUser", email);
+
+        // Close signup modal
+        signupModal.classList.remove("show");
+
+        updateUI();
+    });
+
+    // Handle login
+    authForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+            alert("Please fill out all fields.");
+            return;
+        }
+
+        const storedUserData = localStorage.getItem(email);
+
+        if (!storedUserData) {
+            alert("User not found!");
+            return;
+        }
+
+        const userData = JSON.parse(storedUserData);
+
+        if (userData.password === password) {
+            localStorage.setItem("currentUser", email);
+            loginModal.classList.remove("show");
+            updateUI();
+        } else {
+            alert("Invalid email or password!");
+        }
+    });
+
+    // Handle logout
+    logoutButton.addEventListener("click", function () {
+        console.log("Logging out...");
+        localStorage.removeItem("currentUser");
+        updateUI();
+    });
+
+    // Initialize UI on page load
+    updateUI();
 });
