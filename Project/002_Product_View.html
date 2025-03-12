@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="product_view.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <title>Group 11</title>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <a><img src="/Project/Assets/sub_logo.png" class="nav-logo">Let’s order PC parts for you.</a>
+                <div>
+                    <button class="btn btn-outline">Signup</button>
+                    <button class="btn btn-background">Login</button>
+                </div>
+            </nav>
+        </header>
+
+        <aside>
+            <a href="#"><img src="/Project/Assets/main_logo.png" class="aside-logo"></a>
+            <a href="001_Dashboard.html" class=""><img src="/Project/Assets/dash.png" class="aside-logo dash-btn"></a>
+        </aside>
+
+        <main class="main">
+            <section class="search-section">
+                <input class="search-bar" type="search" placeholder="Search Products">
+                <img class="search-icon" src="/Project/Assets/search_24dp_0E3B66_FILL0_wght400_GRAD0_opsz24.svg">
+                <div class="a2c-container">
+                    <button class="btn btn-background a2c-btn"><img class="cart-icon" src="/Project/Assets/shopping_cart_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="Cart Icon">Cart (0)</button>
+                </div>
+            </section>
+
+            <div>
+                <section class="all-products">
+                    <h2>All Products</h2>
+                </section>
+
+                <section class="product-view">
+                    <figure id="product-figure">
+                        <img id="product-image" src="" alt="Product Image">
+                    </figure>
+
+                    <article class="product-details">
+                        <h3 id="product-title"></h3>
+                        <p id="product-rating" class="rating-text"></p>
+                        <p id="product-price" class="price"></p>
+                        <p id="product-description"></p>
+
+                        <div class="quantity-section">
+                            <label for="quantity">Quantity: </label>
+                            <input type="number" id="quantity" value="1" min="1">
+                            <span id="total-amount" class="total-amount"></span>
+                            <a href="003_Cart.html" id="add-to-cart" class="add-to-cart"><img class="cart-icon" src="/Project/Assets/cart.png" alt="Cart Icon">Add to Cart</a>
+                        </div>
+                    </article>
+                </section>
+            </div>
+
+            <section class="similar-items">
+                <h3>Similar Items</h3>
+                <div id="similar-items-container" class="similar-items-container">
+
+                </div>
+            </section>
+            
+        </main>
+        <script src="product_view.js"></script>
+    </body>
+</html>
