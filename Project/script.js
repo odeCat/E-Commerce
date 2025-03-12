@@ -504,3 +504,23 @@ document.addEventListener("DOMContentLoaded", () => {
         categoriesSection.style.display = "block"; // Show Categories
     });
 });
+
+document.getElementById("dashboardBtn").addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent any default behavior
+
+    // Show all products again
+    document.getElementById("productList").style.display = "flex"; 
+    document.querySelector(".all-products").style.display = "block"; 
+    document.querySelector(".categories-section").style.display = "block"; 
+    document.getElementById("productViewContainer").style.display = "none"; 
+});
+
+document.getElementById("allProductsBtn").addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent any default behavior
+
+    // Show all products again
+    document.getElementById("productList").style.display = "flex"; 
+    document.querySelector(".all-products").style.display = "block"; 
+    document.querySelector(".categories-section").style.display = "block"; 
+    document.getElementById("productViewContainer").style.display = "none"; 
+});
