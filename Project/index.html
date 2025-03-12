@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="dashboard.css">
+        <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     </head>
@@ -74,8 +74,40 @@
                     </ul>
                 </section>
                 <section class="all-products">
-                    <h2>All Products</h2>
                     <ul class="product-card" id="productList"></ul>
+                </section>
+            </div>
+            <div id="productViewContainer" style="display: none;">
+                <section class="all-products">
+                    <a href="001_Dashboard.html">
+                        <img src="/Project/Assets/arrow_back_ios_new_24dp_0E3B66_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="arrow-logo">
+                        <h2> All Products</h2>
+                    </a>
+                </section>
+                <section class="product-view">
+                    <figure id="product-figure">
+                        <img id="product-image" src="" alt="Product Image">
+                    </figure>
+            
+                    <article class="product-details">
+                        <h3 id="product-title"></h3>
+                        <p id="product-rating" class="rating-text"></p>
+                        <p id="product-price" class="price"></p>
+                        <p id="product-description"></p>
+            
+                        <div class="quantity-section">
+                            <label for="quantity">Quantity: </label>
+                            <input type="number" id="quantity" value="1" min="1">
+                            <span id="total-amount" class="total-amount"></span>
+                            <a href="003_Cart.html" id="add-to-cart" class="add-to-cart">
+                                <img class="cart-icon" src="/Project/Assets/cart.png" alt="Cart Icon">Add to Cart
+                            </a>
+                        </div>
+                    </article>
+                </section>
+                <section class="similar-items">
+                    <h2>Similar Items</h2>
+                    <div id="similar-items-container" class="similar-items-container"></div>
                 </section>
             </div>
         </main>
@@ -127,6 +159,6 @@
                 </form>
             </div>
         </div>
-        <script src="dashboard.js"></script>
+        <script src="script.js"></script>
     </body>
 </html>

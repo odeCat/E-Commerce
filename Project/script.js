@@ -6,7 +6,8 @@ const products = [
         price: "₱61,495.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "monitor"
+        category: "monitor",
+        description: 'SPECIFICATION Panel Size 31.5“ Active Display Area (mm) 699.48(H) x 394.73(V) Curvature Flat Panel Type QD-OLED Panel Resolution 3840 x 2160 (UHD) Pixel Pitch (H x V) 0.1814 (H) x 0.1814 (V) Aspect Ratio 16:09 Brightness (nits) SDR: 250 HDR: 450 (Typ.)'
     },
     {
         id: 2,
@@ -236,6 +237,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const switchToSignup = document.getElementById("switchToSignup");
     const switchToLogin = document.getElementById("switchToLogin");
 
+    const closeModal = document.querySelector(".close");
+    const closeSignupModal = document.querySelector(".close-signup");
+
 
     function updateUI() {
         const currentUserEmail = localStorage.getItem("currentUser");
@@ -274,6 +278,15 @@ document.addEventListener("DOMContentLoaded", function () {
     signupButton.addEventListener("click", () => {
         signupModal.classList.add("show");
     });
+
+    closeModal.addEventListener("click", () => {
+        loginModal.style.display = "none";
+    });
+
+    closeSignupModal.addEventListener("click", () => {
+        signupModal.style.display = "none";
+    });
+
 
     // Close modals when clicking outside
     window.addEventListener("click", (event) => {
@@ -368,4 +381,126 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize UI on page load
     updateUI();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const productCards = document.querySelectorAll(".product-card");
+
+    productCards.forEach(card => {
+        card.addEventListener("click", function () {
+            const product = {
+                id: card.getAttribute("data-id"),
+                name: card.querySelector(".product-name").textContent,
+                price: card.querySelector(".product-price").textContent,
+                image: card.querySelector("img").src,
+                description: card.querySelector(".product-description").textContent
+            };
+
+            // Store product details in localStorage
+            localStorage.setItem("selectedProduct", JSON.stringify(product));
+
+            // Redirect to the product view page
+            window.location.href = "product_view.html";
+        });
+    });
+});
+
+
+// Product View
+document.addEventListener("DOMContentLoaded", () => {
+    const productList = document.querySelector("#productList"); // Main product list
+    const productViewContainer = document.getElementById("productViewContainer"); // Product details section
+    const allProductsSection = document.querySelector(".all-products"); // "All Products" section
+    const categoriesSection = document.querySelector(".categories-section"); // Categories section
+    const similarItemsContainer = document.getElementById("similar-items-container"); // Similar items section
+    const quantityInput = document.getElementById("quantity");
+    const totalAmount = document.getElementById("total-amount");
+    
+
+    // Function to update product details
+    function loadProductView(product) {
+        document.getElementById("product-image").src = product.image;
+        document.getElementById("product-title").textContent = product.name;
+        document.getElementById("product-rating").textContent = product.reviews;
+        document.getElementById("product-price").textContent = product.price;
+        document.getElementById("product-description").textContent = product.description || "No description available.";
+
+        // Reset quantity and update total price
+        quantityInput.value = 1;
+        totalAmount.textContent = product.price;
+
+        // Hide product list, categories, and show product details
+        productList.style.display = "none";
+        allProductsSection.style.display = "none"; // Hide "All Products" section
+        categoriesSection.style.display = "none"; // Hide Categories
+        productViewContainer.style.display = "block"; // Show product details
+
+        // Load similar items with the same styling as products
+        loadSimilarItems(product.category, product.id);
+    }
+
+    function attachQuantityLogic(pricePerItem) {
+        const quantityInput = document.getElementById('quantity');
+        const totalAmount = document.getElementById('total-amount');
+      
+        quantityInput.addEventListener('input', () => {
+          let qty = parseInt(quantityInput.value, 10) || 1;
+          if (qty < 1) qty = 1;
+          quantityInput.value = qty;
+          // Recalculate total
+          const newTotal = pricePerItem * qty;
+          totalAmount.textContent = formatPeso(newTotal);
+        });
+    }
+
+    function loadSimilarItems(category, currentProductId) {
+        similarItemsContainer.innerHTML = ""; // Clear previous similar items
+    
+        // Filter products by category (excluding the current product)
+        const similarProducts = products
+            .filter(p => p.category === category && p.id !== currentProductId)
+            .slice(0, 3); // Limit to 1-3 products
+    
+        // Create product elements using the same structure as All Products
+        similarProducts.forEach(product => {
+            const productItem = document.createElement("li");
+            productItem.innerHTML = `
+                 <a href="#">
+                <img class="product-img" src="${product.image}" alt="${product.name}">
+                <div class="product-card-body">
+                    <h5>${product.name}</h5>
+                    <div class="product-card-text">
+                        <img class="ratings-icon" src="${product.rating}" alt="Stars icon">
+                        <h6>${product.price}</h6>
+                    </div>
+                    <h5>${product.reviews}</h5>
+                </div>
+            </a>
+        `;
+    
+            // Add click event to open this product in product view
+            productItem.querySelector("a").addEventListener("click", (event) => {
+                event.preventDefault();
+                loadProductView(product);
+            });
+    
+            similarItemsContainer.appendChild(productItem);
+        });
+    }
+
+    // Add event listeners to product items
+    document.querySelectorAll(".product-card li a").forEach((productItem, index) => {
+        productItem.addEventListener("click", (event) => {
+            event.preventDefault();
+            loadProductView(products[index]);
+        });
+    });
+
+    // Back to Products button functionality
+    document.getElementById("backToProducts").addEventListener("click", () => {
+        productViewContainer.style.display = "none"; // Hide product view
+        productList.style.display = "flex"; // Show product list
+        allProductsSection.style.display = "block"; // Show "All Products" section
+        categoriesSection.style.display = "block"; // Show Categories
+    });
 });
