@@ -161,7 +161,7 @@ let filteredProducts = products;
 
 
 function displayProducts(productsToShow, category = "All Products") {
-    productList.innerHTML = ""; // Clear the current product list
+    productList.innerHTML = "";
     allProductsHeading.textContent = category;
 
     productsToShow.forEach(product => {
@@ -180,9 +180,23 @@ function displayProducts(productsToShow, category = "All Products") {
             </a>
         `;
 
+        // Add click event to each product item
+        productItem.querySelector(".product-link").addEventListener("click", function(event) {
+            event.preventDefault();
+            // Find the product by id
+            const productId = parseInt(this.getAttribute("data-id"));
+            const selectedProduct = products.find(p => p.id === productId);
+            
+            if (selectedProduct) {
+                loadProductView(selectedProduct);
+            }
+        });
+
         productList.appendChild(productItem);
     });
 }
+
+document.querySelector('.categories-btn li[data-category="all"]').classList.add('active-category');
 
 
 categoryButtons.forEach(button => {
@@ -221,13 +235,13 @@ const categoryButtonsClicked = document.querySelectorAll(".categories-btn li");
 
 categoryButtonsClicked .forEach(button => {
     button.addEventListener("click", function () {
-        // Remove active class from all buttons
+        
         categoryButtonsClicked .forEach(btn => btn.classList.remove("active-category"));
 
-        // Add active class to the clicked button
+       
         this.classList.add("active-category");
 
-        // Filter and display products
+        
         const category = this.getAttribute("data-category");
         if (category === "all") {
             filteredProducts = products;
@@ -281,12 +295,12 @@ document.addEventListener("DOMContentLoaded", function () {
     
             authButtons.classList.add("hidden");
             userDropdown.classList.remove("hidden");
-            userDropdown.style.display = "flex"; // Ensure visibility
+            userDropdown.style.display = "flex";
         } else {
             console.log("No user found, showing login buttons.");
             authButtons.classList.remove("hidden");
             userDropdown.classList.add("hidden");
-            userDropdown.style.display = "none"; // Ensure it's hidden
+            userDropdown.style.display = "none";
         }
     }
 
@@ -354,7 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Save user data (including first name)
+
         localStorage.setItem(email, JSON.stringify({ firstName, lastName, password }));
         localStorage.setItem("currentUser", email);
 
@@ -403,6 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize UI on page load
     updateUI();
+    updateCartCount();
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -430,25 +445,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Product View
 document.addEventListener("DOMContentLoaded", () => {
-    const productList = document.querySelector("#productList"); // Main product list
-    const productViewContainer = document.getElementById("productViewContainer"); // Product details section
-    const allProductsSection = document.querySelector(".all-products"); // "All Products" section
-    const categoriesSection = document.querySelector(".categories-section"); // Categories section
-    const similarItemsContainer = document.getElementById("similar-items-container"); // Similar items section
+    const productList = document.querySelector("#productList"); 
+    const productViewContainer = document.getElementById("productViewContainer"); 
+    const allProductsSection = document.querySelector(".all-products"); 
+    const categoriesSection = document.querySelector(".categories-section"); 
+    const similarItemsContainer = document.getElementById("similar-items-container"); 
     const quantityInput = document.getElementById("quantity");
     const totalAmount = document.getElementById("total-amount");
-    
 
     // Function to update product details
     function loadProductView(product) {
-        console.log("Loading product:", product.name); // Debugging log
-    
+
         // Update product details
         document.getElementById("product-image").src = product.image;
         document.getElementById("product-title").textContent = product.name;
         document.getElementById("product-rating").textContent = product.reviews;
         document.getElementById("product-price").textContent = product.price;
         document.getElementById("product-description").textContent = product.description || "No description available.";
+
+         // Add data-id to the product title
+        const productTitle = document.getElementById("product-title");
+        productTitle.textContent = product.name;
+        productTitle.setAttribute("data-id", product.id);
     
         // Reset quantity and update total price
         quantityInput.value = 1;
@@ -461,6 +479,72 @@ document.addEventListener("DOMContentLoaded", () => {
         productViewContainer.style.display = "block"; 
         
         loadSimilarItems(product.category, product.id);
+
+        const addToCartButton = document.getElementById("add-to-cart-button");
+        if (addToCartButton) {
+            // Remove any existing listeners to prevent duplicates
+            addToCartButton.replaceWith(addToCartButton.cloneNode(true));
+            
+            // Get the freshly cloned button
+            const newAddToCartButton = document.getElementById("add-to-cart-button");
+            
+            // Add event listener to the button
+            newAddToCartButton.addEventListener("click", function(event) {
+                event.preventDefault();
+                console.log("Add to cart clicked"); // Debug line
+                
+                // Check if user is logged in
+                const currentUser = localStorage.getItem("currentUser");
+                
+                if (!currentUser) {
+                    
+                    // Optionally open the login modal
+                    const loginModal = document.getElementById("authModal");
+                    if (loginModal) {
+                        loginModal.classList.add("show");
+                    }
+                    return;
+                }
+                
+                // User is logged in - proceed with adding to cart
+                const productData = {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: parseInt(document.getElementById("quantity").value || 1)
+                };
+                
+                // Add to cart
+                addProductToCart(productData, currentUser);
+                
+                // Show confirmation
+                alert("Product added to cart successfully!");
+            });
+        }
+    }
+
+    function addProductToCart(product, userEmail) {
+        // Get existing cart or create new one
+        let userCart = JSON.parse(localStorage.getItem(`cart_${userEmail}`)) || [];
+        
+        // Check if product already exists in cart
+        const existingProductIndex = userCart.findIndex(item => item.id === product.id);
+        
+        if (existingProductIndex >= 0) {
+            // Update quantity if product already in cart
+            userCart[existingProductIndex].quantity += product.quantity;
+        } else {
+            // Add new product to cart
+            userCart.push(product);
+        }
+        
+        // Save updated cart back to localStorage
+        localStorage.setItem(`cart_${userEmail}`, JSON.stringify(userCart));
+        console.log("Cart updated:", userCart); // Debug line
+        
+        // Update cart count display
+        updateCartCount();
     }
 
     function attachQuantityLogic(pricePerItem) {
@@ -501,6 +585,42 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </a>
         `;
+
+        window.displayProducts = function(productsToShow, category = "All Products") {
+            productList.innerHTML = "";
+            allProductsHeading.textContent = category;
+    
+            productsToShow.forEach(product => {
+                const productItem = document.createElement("li");
+                productItem.innerHTML = `
+                    <a href="#" class="product-link" data-id="${product.id}">
+                        <img class="product-img" src="${product.image}" alt="${product.name}">
+                        <div class="product-card-body">
+                            <h5 class="product-name">${product.name}</h5>
+                            <div class="product-card-text">
+                                <img class="ratings-icon" src="${product.rating}" alt="Stars icon">
+                                <h6 class="product-price">${product.price}</h6>
+                            </div>
+                            <h5 class="product-reviews">${product.reviews}</h5>
+                        </div>
+                    </a>
+                `;
+    
+                // Add product click handler that uses our local loadProductView function
+                const productLink = productItem.querySelector(".product-link");
+                productLink.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const productId = parseInt(this.getAttribute("data-id"));
+                    const selectedProduct = products.find(p => p.id === productId);
+                    
+                    if (selectedProduct) {
+                        loadProductView(selectedProduct);
+                    }
+                });
+    
+                productList.appendChild(productItem);
+            }); 
+        }
     
             // Add click event to open this product in product view
             productItem.querySelector("a").addEventListener("click", (event) => {
@@ -527,6 +647,7 @@ document.addEventListener("DOMContentLoaded", () => {
         allProductsSection.style.display = "block"; // Show "All Products" section
         categoriesSection.style.display = "block"; // Show Categories
     });
+
 });
 
 document.getElementById("dashboardBtn").addEventListener("click", (event) => {
@@ -561,6 +682,9 @@ document.getElementById("quantity").addEventListener("input", function () {
 
     // Update total price
     document.getElementById("total-amount").textContent = "₱" + (productPrice * qty).toLocaleString("en-US", { minimumFractionDigits: 2 });
+
+});
+
 });
 
 /*

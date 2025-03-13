@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="styles.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <title>CompuParts</title>
     </head>
     <body>
         <header>
@@ -90,7 +91,7 @@
                     </figure>
             
                     <article class="product-details">
-                        <h3 id="product-title"></h3>
+                        <h3 id="product-title" data-id="${product.id}"></h3>
                         <p id="product-rating" class="rating-text"></p>
                         <p id="product-price" class="price"></p>
                         <p id="product-description"></p>
@@ -99,7 +100,7 @@
                             <label for="quantity">Quantity: </label>
                             <input type="number" id="quantity" value="1" min="1">
                             <span id="total-amount" class="total-amount"></span>
-                            <a href="003_Cart.html" id="add-to-cart" class="add-to-cart">
+                            <a href="#" id="add-to-cart-button" class="add-to-cart">
                                 <img class="cart-icon" src="/Project/Assets/cart.png" alt="Cart Icon">Add to Cart
                             </a>
                         </div>
