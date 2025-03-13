@@ -78,7 +78,7 @@
                     <ul class="product-card" id="productList"></ul>
                 </section>
             </div>
-            <div id="productViewContainer" style="display: none;">
+            <div id="productViewContainer">
                 <section class="all-products">
                     <a href="#" id="allProductsBtn">
                         <img src="/Project/Assets/arrow_back_ios_new_24dp_0E3B66_FILL0_wght400_GRAD0_opsz24.svg" alt="" class="arrow-logo">
@@ -110,6 +110,52 @@
                     <h2>Similar Items</h2>
                     <div id="similar-items-container" class="similar-items-container"></div>
                 </section>
+            </div>
+            <div class="content-grid" id="cartViewContainer">
+                <div class="flex-wrapper">
+                    <section class="cart-items-section">
+                        <h2>Your Cart</h2>
+                        <div id="cartItems" class="cart-list"></div>
+                        <div id="emptyCart" class="empty-cart hidden">
+                            <p>There are no items in this cart.</p>
+                            <button class="continue-shopping" id="continueShopping">Continue Shopping</button>
+                        </div>
+                    </section>
+                
+                    <section class="shipping-section">
+                        <h2>Shipping Information</h2>
+                        <form id="shippingForm" class="shipping-form">
+                            <div class="form-row">
+                                <input type="text" id="firstName" placeholder="First Name" required>
+                                <input type="text" id="lastName" placeholder="Last Name" required>
+                            </div>
+                            <input type="text" id="address1" placeholder="Address" required>
+                            <input type="text" id="address2" placeholder="Address 2 (Optional)">
+                            <div class="form-row three-cols">
+                                <input type="text" id="city" placeholder="City" required>
+                                <input type="text" id="state" placeholder="State" required>
+                                <input type="text" id="zipCode" placeholder="ZIP Code" required>
+                            </div>
+                
+                            <div class="order-summary">
+                                <h3>Order Summary</h3>
+                                <div class="summary-row">
+                                    <span>Items:</span>
+                                    <span id="itemsTotal">₱0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Shipping Fee:</span>
+                                    <span id="shippingFee">₱500.00</span>
+                                </div>
+                                <div class="summary-row total">
+                                    <span>Total Amount:</span>
+                                    <span id="totalAmount">₱500.00</span>
+                                </div>
+                            </div>
+                            <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+                        </form>
+                    </section>
+                    </div>
             </div>
         </main>
         <div id="authModal" class="modal">
@@ -160,6 +206,50 @@
                 </form>
             </div>
         </div>
+        <dialog id="deleteModal" class="modal2 delete-modal">
+            <h2>Are you sure you want to remove this item?</h2>
+            <div class="modal-actions">
+                <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                <button id="confirmDelete" class="btn-primary">Remove</button>
+            </div>
+        </dialog>
+
+        <dialog id="paymentModal" class="modal2 payment-modal">
+            <div class="modal-header">
+                <img src="Assets/main_logo.png" alt="Logo" class="modal-logo">
+                <button class="close-modal" aria-label="Close">&times;</button>
+            </div>
+            <form id="paymentForm" class="payment-form">
+                <div class="payment-methods">
+                    <img src="Assets/visa.png" alt="Visa" class="payment-card">
+                    <img src="Assets/card_16174534.png" alt="Mastercard" class="payment-card">
+                </div>
+                <h2>Card Details</h2>
+                <div class="form-group">
+                    <label for="cardName">Card Name</label>
+                    <input type="text" id="cardName">
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvc">CVC</label>
+                        <input type="text" id="cvc" placeholder="123">
+                    </div>
+                </div>
+                <div class="payment-total">
+                    <span>Total Amount:</span>
+                    <span id="paymentAmount">₱500.00</span>
+                </div>
+                <button type="submit" class="pay-btn">Pay</button>
+            </form>
+        </dialog>
         <script src="script.js"></script>
     </body>
 </html>

@@ -156,9 +156,7 @@ const productList = document.querySelector("#productList");
 const categoryButtons = document.querySelectorAll(".categories-btn li");
 const searchBar = document.querySelector(".search-bar");
 const allProductsHeading = document.querySelector(".all-products h2");
-
 let filteredProducts = products;
-
 
 function displayProducts(productsToShow, category = "All Products") {
     productList.innerHTML = "";
@@ -417,7 +415,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Initialize UI on page load
     updateUI();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
     updateCartCount();
+    
+    // Update cart when user logs in or out
+    const updateUI = window.updateUI;
+    if (updateUI) {
+        window.updateUI = function() {
+            updateUI.call(this);
+            updateCartCount();
+        };
+    }
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -497,11 +507,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 const currentUser = localStorage.getItem("currentUser");
                 
                 if (!currentUser) {
+                    console.log("User not logged in, showing login modal"); // Debug line
                     
-                    // Optionally open the login modal
+                    // Get the login modal
                     const loginModal = document.getElementById("authModal");
+                    
                     if (loginModal) {
+                        // Ensure any hidden class is removed and show class is added
+                        loginModal.classList.remove("hide");
+                        loginModal.style.display = ("flex");
                         loginModal.classList.add("show");
+                
+                        // Reset any form inputs if needed
+                        const loginForm = loginModal.querySelector("form");
+                        if (loginForm) loginForm.reset();
+                    } else {
+                        console.error("Auth modal not found in the DOM");
                     }
                     return;
                 }
@@ -514,12 +535,46 @@ document.addEventListener("DOMContentLoaded", () => {
                     image: product.image,
                     quantity: parseInt(document.getElementById("quantity").value || 1)
                 };
-                
+        
+                const overlay = document.createElement("div");
+                overlay.classList.add("added-to-cart-overlay");
+        
+                const modal = document.createElement("div");
+                modal.classList.add("added-to-cart-modal");
+        
+                // Checkmark
+                const checkIcon = document.createElement("img");
+                checkIcon.src = "/Project/Assets/check.png"; 
+                checkIcon.alt = "Success Checkmark";
+                checkIcon.classList.add("check-icon");
+        
+                // Text
+                 const messageSpan = document.createElement("span");
+                 messageSpan.textContent = "Added to cart successfully!";
+        
+                // Append elements
+                modal.appendChild(checkIcon);
+                modal.appendChild(messageSpan);
+                overlay.appendChild(modal);
+                document.body.appendChild(overlay);
+        
+                // Fade-In Effect
+                setTimeout(() => {
+                    overlay.classList.add("show");
+                }, 10);
+        
+                 // Hide After 2 Seconds
+                setTimeout(() => {
+                    overlay.classList.remove("show");
+                     setTimeout(() => {
+                         overlay.remove();
+                     }, 300);
+                 }, 2000);
+                        
                 // Add to cart
                 addProductToCart(productData, currentUser);
+                updateCartCount();
                 
-                // Show confirmation
-                alert("Product added to cart successfully!");
             });
         }
     }
@@ -543,7 +598,6 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(`cart_${userEmail}`, JSON.stringify(userCart));
         console.log("Cart updated:", userCart); // Debug line
         
-        // Update cart count display
         updateCartCount();
     }
 
@@ -640,13 +694,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Back to Products button functionality
-    document.getElementById("backToProducts").addEventListener("click", () => {
-        productViewContainer.style.display = "none"; // Hide product view
-        productList.style.display = "flex"; // Show product list
-        allProductsSection.style.display = "block"; // Show "All Products" section
-        categoriesSection.style.display = "block"; // Show Categories
-    });
+    // // Back to Products button functionality
+    // document.getElementById("backToProducts").addEventListener("click", () => {
+    //     productViewContainer.style.display = "none"; // Hide product view
+    //     productList.style.display = "flex"; // Show product list
+    //     allProductsSection.style.display = "block"; // Show "All Products" section
+    //     categoriesSection.style.display = "block"; // Show Categories
+    // });
 
 });
 
@@ -657,7 +711,8 @@ document.getElementById("dashboardBtn").addEventListener("click", (event) => {
     document.getElementById("productList").style.display = "flex"; 
     document.querySelector(".all-products").style.display = "block"; 
     document.querySelector(".categories-section").style.display = "block"; 
-    document.getElementById("productViewContainer").style.display = "none"; 
+    document.getElementById("productViewContainer").style.display = "none";
+    document.getElementById("cartViewContainer").style.display = "none";
 });
 
 document.getElementById("allProductsBtn").addEventListener("click", (event) => {
@@ -668,6 +723,7 @@ document.getElementById("allProductsBtn").addEventListener("click", (event) => {
     document.querySelector(".all-products").style.display = "block"; 
     document.querySelector(".categories-section").style.display = "block"; 
     document.getElementById("productViewContainer").style.display = "none"; 
+    document.getElementById("cartViewContainer").style.display = "none";
 });
 
 document.getElementById("quantity").addEventListener("input", function () {
@@ -685,56 +741,316 @@ document.getElementById("quantity").addEventListener("input", function () {
 
 });
 
-});
 
-/*
-Last Updated: 2025-03-13
-Author: Catherine Olleres
-Last Updated By: Catherine Olleres
-*/
+// ===========================
+// 🛒 CART & PRODUCT MANAGEMENT 
+// ===========================
+document.addEventListener("DOMContentLoaded", () => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const elements = {
+        cartButton: document.querySelector(".a2c-btn"),
+        cartViewContainer: document.getElementById("cartViewContainer"),
+        productList: document.getElementById("productList"),
+        allProductsSection: document.querySelector(".all-products"),
+        categoriesSection: document.querySelector(".categories-section"),
+        cartContainer: document.getElementById("cartItems"),
+        emptyCart: document.getElementById("emptyCart"),
+        deleteModal: document.getElementById("deleteModal"),
+        cancelDelete: document.getElementById("cancelDelete"),
+        confirmDelete: document.getElementById("confirmDelete"),
+        shippingForm: document.getElementById("shippingForm"),
+        paymentModal: document.getElementById("paymentModal"),
+        paymentForm: document.getElementById("paymentForm"),
+        closeModal: document.querySelector(".close-modal"),
+        continueShopping: document.getElementById("continueShopping"),
+    };
 
-// UPDATE
-// Added to Cart
-document.addEventListener("DOMContentLoaded", function () {
-    const addToCartButton = document.getElementById("add-to-cart");
-    if (addToCartButton) {
-        addToCartButton.addEventListener("click", function (event) {
+    let itemToDelete = null; // Variable to store the ID of the item to delete
+
+    // Function to show the delete modal
+    window.showDeleteModal = function(productId) {
+        itemToDelete = productId; // Store the product ID
+        const deleteModal = document.getElementById("deleteModal");
+        deleteModal.showModal(); // Show the modal
+    };
+
+    // Event listener for the "Cancel" button
+    document.getElementById("cancelDelete").addEventListener("click", () => {
+        const deleteModal = document.getElementById("deleteModal");
+        deleteModal.close(); // Close the modal
+    });
+
+    // Event listener for the "Remove" button
+    document.getElementById("confirmDelete").addEventListener("click", () => {
+        const currentUser = localStorage.getItem("currentUser");
+        if (currentUser) {
+            let userCart = JSON.parse(localStorage.getItem(`cart_${currentUser}`)) || [];
+            userCart = userCart.filter(item => item.id !== itemToDelete); // Remove the item
+            localStorage.setItem(`cart_${currentUser}`, JSON.stringify(userCart)); // Update the cart
+            renderCart(); // Re-render the cart
+            updateCartCount(); // Update the cart count
+        }
+        const deleteModal = document.getElementById("deleteModal");
+        deleteModal.close(); // Close the modal
+    });
+
+
+    // Show cart view
+    function showCartView() {
+        elements.cartViewContainer.style.display = "block"; // Show cart page
+        elements.productList.style.display = "none"; // Hide product list
+        elements.allProductsSection.style.display = "none"; // Hide all products
+        elements.categoriesSection.style.display = "none"; // Hide categories
+        renderCart();
+        updateCartCount();
+    }
+
+    function updateCartTotals(cartItems) {
+        const itemsTotal = cartItems.reduce((total, item) => total + (item.numericPrice * item.quantity), 0);
+        const shippingFee = 500; // Fixed shipping fee
+        const totalAmount = itemsTotal + shippingFee;
+    
+        // Update the order summary
+        document.getElementById("itemsTotal").textContent = `₱${itemsTotal.toFixed(2)}`;
+        document.getElementById("shippingFee").textContent = `₱${shippingFee.toFixed(2)}`;
+        document.getElementById("totalAmount").textContent = `₱${totalAmount.toFixed(2)}`;
+    }
+
+    // Attach event listener to cart button
+    if (elements.cartButton) {
+        elements.cartButton.addEventListener("click", (event) => {
             event.preventDefault();
-
-            const overlay = document.createElement("div");
-            overlay.classList.add("added-to-cart-overlay");
-
-            const modal = document.createElement("div");
-            modal.classList.add("added-to-cart-modal");
-
-            // Checkmark
-            const checkIcon = document.createElement("img");
-            checkIcon.src = "/Project/Assets/check.png"; 
-            checkIcon.alt = "Success Checkmark";
-            checkIcon.classList.add("check-icon");
-
-            // Text
-            const messageSpan = document.createElement("span");
-            messageSpan.textContent = "Added to cart successfully!";
-
-            // Append elements
-            modal.appendChild(checkIcon);
-            modal.appendChild(messageSpan);
-            overlay.appendChild(modal);
-            document.body.appendChild(overlay);
-
-            // Fade-In Effect
-            setTimeout(() => {
-                overlay.classList.add("show");
-            }, 10);
-
-            // Hide After 2 Seconds
-            setTimeout(() => {
-                overlay.classList.remove("show");
-                setTimeout(() => {
-                    overlay.remove();
-                }, 300);
-            }, 2000);
+            showCartView();
         });
     }
+
+    function renderCart() {
+        const currentUser = localStorage.getItem("currentUser");
+        if (!currentUser) return;
+        
+        const userCart = JSON.parse(localStorage.getItem(`cart_${currentUser}`)) || [];
+        
+        // Get cart elements
+        const cartContainer = document.getElementById("cartItems");
+        const emptyCartMessage = document.getElementById("emptyCart");
+        
+        // If the cart is empty, show the message
+        if (userCart.length === 0) {
+            cartContainer.innerHTML = "";
+            emptyCartMessage.classList.remove("hidden");
+            
+            // Hide order summary if cart is empty
+            const summaryEl = document.querySelector(".order-summary");
+            if (summaryEl) {
+                summaryEl.style.display = "none";
+            }
+            return;
+        }
+        
+        // Hide empty cart message
+        emptyCartMessage.classList.add("hidden");
+        
+        // Show order summary
+        const summaryEl = document.querySelector(".order-summary");
+        if (summaryEl) {
+            summaryEl.style.display = "block";
+        }
+        
+        // Parse prices properly
+        const cartItemsWithParsedPrices = userCart.map(item => {
+            // Extract the numeric part of the price string (remove ₱ and commas)
+            const priceValue = parseFloat(item.price.replace(/[₱,]/g, ""));
+            return {
+                ...item,
+                numericPrice: priceValue
+            };
+        });
+        
+        // Render cart items
+        cartContainer.innerHTML = cartItemsWithParsedPrices.map(item => `
+            <div class="cart-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="item-details">
+                    <h3>${item.name}</h3>
+                    <div class="item-price">₱${item.numericPrice.toFixed(2)}</div>
+                </div>
+                <div class="quantity-container">
+                    <span>Quantity</span>
+                    <div class="quantity-controls">
+                        <input type="text" value="${item.quantity}" readonly>
+                        <div class="quantity-buttons">
+                            <button onclick="updateCartQuantity(${item.id}, 1)">▲</button>
+                            <button onclick="updateCartQuantity(${item.id}, -1)">▼</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="total-amount">
+                    <span>Total Amount</span>
+                    <div class="amount">₱${(item.numericPrice * item.quantity).toFixed(2)}</div>
+                </div>
+                <button class="remove-btn" onclick="showDeleteModal(${item.id})">×</button>
+            </div>
+        `).join('');
+        
+        updateCartTotals(cartItemsWithParsedPrices);
+    }
+    
+
+    // Update quantity in cart
+    window.updateCartQuantity = (id, change) => {
+        const currentUser = localStorage.getItem("currentUser");
+        if (!currentUser) return;
+        
+        const userCart = JSON.parse(localStorage.getItem(`cart_${currentUser}`)) || [];
+        const item = userCart.find(item => item.id === id);
+        
+        if (item) {
+            item.quantity = Math.max(1, item.quantity + change);
+            localStorage.setItem(`cart_${currentUser}`, JSON.stringify(userCart));
+            renderCart();
+            updateCartCount();
+        }
+    };
+
+
+    // Handle checkout
+    elements.shippingForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get current user and their cart
+        const currentUser = localStorage.getItem("currentUser");
+        if (!currentUser) {
+            alert("Please log in to proceed.");
+            return;
+        }
+        const userCart = JSON.parse(localStorage.getItem(`cart_${currentUser}`)) || [];
+        
+        if (userCart.length === 0) {
+            alert('Your cart is empty. Please add items before proceeding to checkout.');
+            return;
+        }
+        
+        // Show payment modal
+        elements.paymentModal.showModal();
+    });
+
+    // In the DOMContentLoaded event listener
+    elements.paymentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Get current user
+    const currentUser = localStorage.getItem("currentUser");
+    
+    if (currentUser) {
+        // Clear the cart for this user
+        localStorage.removeItem(`cart_${currentUser}`);
+        
+        // Close payment modal
+        elements.paymentModal.close();
+        
+        // Update UI
+        renderCart();
+        updateCartCount();
+        
+        // Show confirmation (optional)
+        const overlay = document.createElement("div");
+                overlay.classList.add("added-to-cart-overlay");
+        
+                const modal = document.createElement("div");
+                modal.classList.add("added-to-cart-modal");
+        
+                // Checkmark
+                const checkIcon = document.createElement("img");
+                checkIcon.src = "/Project/Assets/check.png"; 
+                checkIcon.alt = "Success Checkmark";
+                checkIcon.classList.add("check-icon");
+        
+                // Text
+                 const messageSpan = document.createElement("span");
+                 messageSpan.textContent = "Payment Successful!";
+        
+                // Append elements
+                modal.appendChild(checkIcon);
+                modal.appendChild(messageSpan);
+                overlay.appendChild(modal);
+                document.body.appendChild(overlay);
+        
+                // Fade-In Effect
+                setTimeout(() => {
+                    overlay.classList.add("show");
+                }, 10);
+        
+                 // Hide After 2 Seconds
+                setTimeout(() => {
+                    overlay.classList.remove("show");
+                     setTimeout(() => {
+                         overlay.remove();
+                     }, 300);
+                 }, 2000);
+        // You could also redirect to home page
+        // window.location.href = "/";
+    }
 });
+
+    renderCart();
+    updateCartCount();
+});
+
+
+document.querySelector(".a2c-btn").addEventListener("click", () => {
+    document.getElementById("productViewContainer").style.display = "none";
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) {
+        console.log("User not logged in, showing login modal"); // Debug line
+        
+        // Get the login modal
+        const loginModal = document.getElementById("authModal");
+        
+        if (loginModal) {
+            // Ensure any hidden class is removed and show class is added
+            loginModal.classList.remove("hide");
+            loginModal.style.display = ("flex");
+            loginModal.classList.add("show");
+    
+            // Reset any form inputs if needed
+            const loginForm = loginModal.querySelector("form");
+            if (loginForm) loginForm.reset();
+        } else {
+            console.error("Auth modal not found in the DOM");
+        }
+        return;
+    }
+     // Hide product listings, categories, and product details
+     document.getElementById("productList").style.display = "none";
+     document.querySelector(".all-products").style.display = "none";
+     document.querySelector(".categories-section").style.display = "none";
+     // Show the cart view
+     document.getElementById("cartViewContainer").style.display = "block";
+});
+
+document.getElementById("continueShopping").addEventListener("click", () => {
+    // Show products and categories
+    document.getElementById("productList").style.display = "flex";
+    document.querySelector(".all-products").style.display = "block";
+    document.querySelector(".categories-section").style.display = "block";
+
+    // Hide the cart view
+    document.getElementById("cartViewContainer").style.display = "none";
+
+    // Reattach product click events
+    attachProductClickEvents();
+});
+
+// CART THINGS
+
+function updateCartCount() {
+    const currentUser = localStorage.getItem("currentUser");
+    if (!currentUser) return;
+    const userCart = JSON.parse(localStorage.getItem(`cart_${currentUser}`)) || [];
+    const cartCountElement = document.querySelector(".a2c-btn");
+    const totalQuantity = userCart.reduce((total, item) => total + (item.quantity || 1), 0);
+    // Calculate total quantity of all items in cart
+    if (cartCountElement) {
+        cartCountElement.innerHTML = `<img class="cart-icon" src="/Project/Assets/shopping_cart_24dp_F4D35E_FILL0_wght400_GRAD0_opsz24.svg" alt="Cart Icon."> Cart (${totalQuantity})`;
+    }
+}
