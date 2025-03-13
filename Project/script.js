@@ -16,7 +16,8 @@ const products = [
         price: "₱35,950.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "cpu"
+        category: "cpu",
+        description: `The Intel Core Ultra 9 285 is a high-end desktop processor designed for power users, content creators, and gamers who demand top-tier performance. Built on Intel's Arrow Lake architecture, this CPU features a 24-core, 24-thread hybrid design, combining 10 Performance-cores (P-cores) for intensive workloads and 14 Efficiency-cores (E-cores) for optimized power consumption.`
     },
     {
         id: 3,
@@ -25,7 +26,8 @@ const products = [
         price: "₱145,695.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "gpu"
+        category: "gpu",
+        description: 'ROG Strix GeForce RTX® 4090 OC Edition 24GB GDDR6X with DLSS 3 and chart-topping thermal performance NVIDIA Ada Lovelace Streaming Multiprocessors: Up to 2x performance and power efficiency 4th Generation Tensor Cores: Up to 4x performance with DLSS 3 vs. brute-force rendering'
     },
     {
         id: 4,
@@ -34,7 +36,8 @@ const products = [
         price: "₱4,350.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "ram"
+        category: "ram",
+        description: 'Engineered and optimized for full compatibility on the latest AMD Ryzen platforms, Trident Z Neo brings unparalleled DRAM memory performance and vibrant RGB lighting to any gaming PC or workstation with latest AMD Ryzen CPUs and AMD DDR4 motherboards. Optimized DDR4 Performance for AMD Ryzen'
     },
     {
         id: 5,
@@ -43,7 +46,8 @@ const products = [
         price: "₱6,050.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "pc-case"
+        category: "pc-case",
+        description: 'SPECIFICATION Model ProArt PA401 Wood Edition - Tempered Glass Panel Motherboard Support ATX Drive Bays 2 x 2.5" Bay 2 x 2.5"/3.5" Combo Bay Expansion Slots 7 Front I/O Port 1 x headphone / Microphone 2 x USB 3.2 Gen1 1 x USB 3.2 Gen 2x2 Type C Radiator Support (Top) 120 mm'
     },
     {
         id: 6,
@@ -52,7 +56,8 @@ const products = [
         price: "₱6,050.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "monitor"
+        category: "monitor",
+        description: 'SPECIFICATION PANEL SIZE 21.45" PANEL RESOLUTION 1920 x 1080 (FHD) REFRESH RATE 100Hz RESPONSE TIME 1ms (MPRT) / 4ms (GTG) PANEL TYPE VA BRIGHTNESS (NITS) 300 VIEWING ANGLE 178(H) / 178(V) ASPECT RATIO 16:09 CONTRAST RATIO 4000:01:00 sRGB 100% (CIE 1976) ACTIVE DISPLAY'
     },
     {
         id: 7,
@@ -61,7 +66,8 @@ const products = [
         price: "₱22,395.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "cpu"
+        category: "cpu",
+        description: `The Intel Core Ultra 7 265 is a next-generation desktop processor designed for high performance and efficiency. Built on Intel's Arrow Lake architecture, this CPU features a hybrid core design with 20 cores and 20 threads, including 8 Performance-cores (P-cores) for demanding tasks`
     },
     {
         id: 8,
@@ -70,7 +76,8 @@ const products = [
         price: "₱117,750.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "gpu"
+        category: "gpu",
+        description: 'GeForce RTX™ 4090 WINDFORCE V2 24GB Specification Graphics Processing: GeForce RTX™ 4090Core Clock: 2520 MHzCUDA® Cores: 16384Memory Clock: 21 GbpsMemory Size: 24 GBMemory Type: GDDR6XMemory Bus: 384 bitCard Bus: PCI-E 4.0Digital max resolution: 7680x4320Multi-view: 4Card size: L=331 W=136 H'
     },
     {
         id: 9,
@@ -79,7 +86,8 @@ const products = [
         price: "₱5,695.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "ram"
+        category: "ram",
+        description: 'VENGEANCE RGB PRO SL VISUALIZE, SYNCHRONIZE, MEMORIZE. OPTIMIZED FOR INTEL® AND AMD® CORSAIR VENGEANCE RGB PRO SL DDR4 memory lights up your PC with dynamic, individually addressable RGB lighting, while delivering peak performance in a compact form factor. INTELLIGENT CONTROL'
     },
     {
         id: 10,
@@ -88,7 +96,8 @@ const products = [
         price: "₱8,650.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "pc-case"
+        category: "pc-case",
+        description: '5000D Tempered Glass Mid-Tower ATX PC Case The CORSAIR 5000D is a mid-tower ATX case that shows off your PC, and not its cables. Hidden cable management and massive cooling potential make building a clean, cool PC easy, with two included CORSAIR AirGuide fans. Specifications: Case Height'
     },
     {
         id: 11,
@@ -97,7 +106,8 @@ const products = [
         price: "₱15,950.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "monitor"
+        category: "monitor",
+        description: 'As an unseen player, monitor is often being underestimated. The truth is monitors form as a synergistic effect and bring out the best performance of PC components. GIGABYTE gaming monitors offer the ultimate specifications and quality, users can truly enjoy upscale performance without the need for extravagance.'
     },
     {
         id: 12,
@@ -106,7 +116,8 @@ const products = [
         price: "₱20,995.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "cpu"
+        category: "cpu",
+        description: 'SPECIFICATION Model name Core i7-14700 Compatible socket LGA1700 Code name Raptor Lake-S Refresh Number of cores 20 cores (P core: 8, E core: 12) Number of threads 28 threads (P core threads: 16, E core threads: 12) base clock P core base clock: 2.1GhzE core base clock: 1'
     },
     {
         id: 13,
@@ -115,7 +126,8 @@ const products = [
         price: "₱9,450.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "gpu"
+        category: "gpu",
+        description: 'AMD Radeon™ RX 6500 XTPhantom Gaming D 4GB OC RX6500XT PGD 4GO PRODUCT BRIEF: Clock: GPU / MemoryBoost Clock: Up to 2820 MHz / 18 GbpsGame Clock: Up to 2650 MHz / 18 GbpsBase Clock: 2365 MHz / 18 Gbps Key Specification6nm AMD Radeon™ RX 6500 XT4GB GDDR6AMD RDNA™ 2 ArchitectureDirectX® 12 Ult'
     },
     {
         id: 14,
@@ -124,7 +136,8 @@ const products = [
         price: "₱3,295.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "ram"
+        category: "ram",
+        description: 'F4-3600C18D-32GVK Ripjaws V series DDR4 DRAM memory is designed for sleek aesthetics and performance, making it an ideal choice for building a new PC system or for upgrading your system memory. SPECIFICATION Memory Type : DDR4 Capacity : 32GB (16GBx2) Multi-Channel Kit'
     },
     {
         id: 15,
@@ -133,7 +146,8 @@ const products = [
         price: "₱3,350.00",
         rating: "/Project/Assets/5 star rating icon.webp",
         reviews: "5 reviews",
-        category: "pc-case"
+        category: "pc-case",
+        description: 'Montech AIR X ARG Black ATX Mid Tower Gaming Case comes with a Unique Diamonded Mesh design. This Unique design case featured with Fine metal mesh front , Dustproof fine, Mesh dust screens, Compact ATX, Double USB 3.0 + Single USB 2.0, 200mm ARGB Fans x 2 + 120mm ARGB Fan x 1, Controller. In this case, All pre-installed fans have already connected with the controller. It is designed with a large surface metallic Diamond Mesh front with air intake mesh and two 200mm ARGB fans. Here, Included another 120mm ARGB fan for a total of three fans and a maximum air intake area for incredible cooling performance and the aesthetics to match.'
     }
     
 ];
@@ -547,4 +561,56 @@ document.getElementById("quantity").addEventListener("input", function () {
 
     // Update total price
     document.getElementById("total-amount").textContent = "₱" + (productPrice * qty).toLocaleString("en-US", { minimumFractionDigits: 2 });
+});
+
+/*
+Last Updated: 2025-03-13
+Author: Catherine Olleres
+Last Updated By: Catherine Olleres
+*/
+
+// UPDATE
+// Added to Cart
+document.addEventListener("DOMContentLoaded", function () {
+    const addToCartButton = document.getElementById("add-to-cart");
+    if (addToCartButton) {
+        addToCartButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            const overlay = document.createElement("div");
+            overlay.classList.add("added-to-cart-overlay");
+
+            const modal = document.createElement("div");
+            modal.classList.add("added-to-cart-modal");
+
+            // Checkmark
+            const checkIcon = document.createElement("img");
+            checkIcon.src = "/Project/Assets/check.png"; 
+            checkIcon.alt = "Success Checkmark";
+            checkIcon.classList.add("check-icon");
+
+            // Text
+            const messageSpan = document.createElement("span");
+            messageSpan.textContent = "Added to cart successfully!";
+
+            // Append elements
+            modal.appendChild(checkIcon);
+            modal.appendChild(messageSpan);
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+
+            // Fade-In Effect
+            setTimeout(() => {
+                overlay.classList.add("show");
+            }, 10);
+
+            // Hide After 2 Seconds
+            setTimeout(() => {
+                overlay.classList.remove("show");
+                setTimeout(() => {
+                    overlay.remove();
+                }, 300);
+            }, 2000);
+        });
+    }
 });
