@@ -524,6 +524,7 @@ label {
 
 .rating-text {
     color: #999;
+    margin-top: 0;
 }
 
 .price {
@@ -816,7 +817,7 @@ label {
 }
 
 .item-price {
-    color: #7B61FF;
+    color: #0D3B66;
     font-weight: 500;
 }
 
@@ -877,7 +878,7 @@ label {
 }
 
 .total-amount span {
-    color: #666;
+    color: #0D3B66;
     font-size: 0.9rem;
     text-align: center;
 }
@@ -886,7 +887,7 @@ label {
     background: #f8f8ff;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    color: #7B61FF;
+    color: #0D3B66;
     font-weight: 500;
     
 }
@@ -907,7 +908,6 @@ label {
 .shipping-form {
     display: flex;
     flex-direction: column;
-    
 }
 
 .form-row {
@@ -931,17 +931,6 @@ label {
 
 input::placeholder {
     color: #999;
-}
-
-.order-summary {
-    padding: 1.5rem;
-    border-radius: 12px;
-    margin: 2rem 0;
-}
-
-.order-summary h3 {
-    color: #0D3B66;
-    margin-bottom: 1rem;
 }
 
 .summary-row {
@@ -970,6 +959,7 @@ input::placeholder {
     font-size: 1rem;
     cursor: pointer;
     transition: opacity 0.2s;
+    margin-top: 1rem;
 }
 
 .checkout-btn:hover {
@@ -1035,7 +1025,16 @@ input::placeholder {
 }
 
 .form-group {
+    box-sizing: border-box;
     margin-bottom: 1.5rem;
+}
+
+.form-group input {
+    width: 100%; 
+    padding: 10px;
+    border: 2px solid #E0E0E0;
+    border-radius: 12px;
+    box-sizing: border-box;
 }
 
 .form-group label {
@@ -1058,8 +1057,8 @@ input::placeholder {
 .pay-btn {
     width: 100%;
     padding: 1rem;
-    background: #7B61FF;
-    color: white;
+    background: #0D3B66;
+    color: #F4d35E;
     border: none;
     border-radius: 12px;
     font-family: inherit;

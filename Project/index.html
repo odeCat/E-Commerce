@@ -92,6 +92,7 @@
             
                     <article class="product-details">
                         <h3 id="product-title" data-id="${product.id}"></h3>
+                        <img src="/Project/Assets/5 star rating icon.webp" class="ratings-icon">
                         <p id="product-rating" class="rating-text"></p>
                         <p id="product-price" class="price"></p>
                         <p id="product-description"></p>
@@ -129,29 +130,32 @@
                                 <input type="text" id="firstName" placeholder="First Name" required>
                                 <input type="text" id="lastName" placeholder="Last Name" required>
                             </div>
-                            <input type="text" id="address1" placeholder="Address" required>
-                            <input type="text" id="address2" placeholder="Address 2 (Optional)">
+
+                            <div class="form-group">
+                                <input type="text" id="address1" placeholder="Address" required>
+                                <input type="text" id="address2" placeholder="Address 2 (Optional)">
+                            </div>
+
                             <div class="form-row three-cols">
                                 <input type="text" id="city" placeholder="City" required>
                                 <input type="text" id="state" placeholder="State" required>
                                 <input type="text" id="zipCode" placeholder="ZIP Code" required>
                             </div>
-                
-                            <div class="order-summary">
-                                <h3>Order Summary</h3>
-                                <div class="summary-row">
-                                    <span>Items:</span>
-                                    <span id="itemsTotal">₱0.00</span>
-                                </div>
-                                <div class="summary-row">
-                                    <span>Shipping Fee:</span>
-                                    <span id="shippingFee">₱500.00</span>
-                                </div>
-                                <div class="summary-row total">
-                                    <span>Total Amount:</span>
-                                    <span id="totalAmount">₱500.00</span>
-                                </div>
+                            
+                            <h3>Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Items:</span>
+                                <span id="itemsTotal">₱0.00</span>
                             </div>
+                            <div class="summary-row">
+                                <span>Shipping Fee:</span>
+                                <span id="shippingFee">₱500.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total Amount:</span>
+                                <span id="totalAmount">₱500.00</span>
+                            </div>
+
                             <button type="submit" class="checkout-btn">Proceed to Checkout</button>
                         </form>
                     </section>
@@ -216,13 +220,13 @@
 
         <dialog id="paymentModal" class="modal2 payment-modal">
             <div class="modal-header">
+                <h2>CompuParts</h2>
                 <img src="Assets/main_logo.png" alt="Logo" class="modal-logo">
                 <button class="close-modal" aria-label="Close">&times;</button>
             </div>
             <form id="paymentForm" class="payment-form">
                 <div class="payment-methods">
-                    <img src="Assets/visa.png" alt="Visa" class="payment-card">
-                    <img src="Assets/card_16174534.png" alt="Mastercard" class="payment-card">
+                    <img src="/Project/Assets/card.png" alt="Visa" class="payment-card">
                 </div>
                 <h2>Card Details</h2>
                 <div class="form-group">
