@@ -694,14 +694,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // // Back to Products button functionality
-    // document.getElementById("backToProducts").addEventListener("click", () => {
-    //     productViewContainer.style.display = "none"; // Hide product view
-    //     productList.style.display = "flex"; // Show product list
-    //     allProductsSection.style.display = "block"; // Show "All Products" section
-    //     categoriesSection.style.display = "block"; // Show Categories
-    // });
-
 });
 
 document.getElementById("dashboardBtn").addEventListener("click", (event) => {
@@ -811,9 +803,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const totalAmount = itemsTotal + shippingFee;
     
         // Update the order summary
-        document.getElementById("itemsTotal").textContent = `₱${itemsTotal.toFixed(2)}`;
+        document.getElementById("itemsTotal").textContent = `₱${itemsTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         document.getElementById("shippingFee").textContent = `₱${shippingFee.toFixed(2)}`;
-        document.getElementById("totalAmount").textContent = `₱${totalAmount.toFixed(2)}`;
+        document.getElementById("totalAmount").textContent = `₱${totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById("paymentAmount").textContent = `₱${totalAmount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     }
 
     // Attach event listener to cart button
@@ -872,7 +865,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img src="${item.image}" alt="${item.name}">
                 <div class="item-details">
                     <h3>${item.name}</h3>
-                    <div class="item-price">₱${item.numericPrice.toFixed(2)}</div>
+                    <div class="item-price">₱${item.numericPrice.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                 </div>
                 <div class="quantity-container">
                     <span>Quantity</span>
@@ -886,7 +879,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div class="total-amount">
                     <span>Total Amount</span>
-                    <div class="amount">₱${(item.numericPrice * item.quantity).toFixed(2)}</div>
+                    <div class="amount">₱${(item.numericPrice * item.quantity).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</div>
                 </div>
                 <button class="remove-btn" onclick="showDeleteModal(${item.id})">×</button>
             </div>
